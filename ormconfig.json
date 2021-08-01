@@ -1,0 +1,15 @@
+{
+  "type": "postgres",
+  "host": "localhost",
+  "port": 5432,
+  "username": "postgres",
+  "password": "postgres",
+  "database": "tododb",
+  "entities": ["dist/**/*.entity{.ts,.js}"],
+  "synchronize": true,
+  "autoLoadEntities": true,
+  "migrations": ["src/migration/*.ts"],
+  "cli": {
+    "migrationsDir": "src/migration"
+  }
+}
