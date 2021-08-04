@@ -7,22 +7,24 @@ import { UpdateCategoryDto } from './dto/update-category.dto';
 
 @Injectable()
 export class CategoriesService {
-
-  constructor( 
-    @InjectRepository(Category) private categoryRepository: Repository<Category> 
-    ) {}
+  constructor(
+    @InjectRepository(Category)
+    private categoryRepository: Repository<Category>,
+  ) {}
 
   async getAll(): Promise<Category[]> {
-    return (await this.categoryRepository.find({relations: ["tasks"]}));
+    return await this.categoryRepository.find({
+      relations: ['tasks'],
+    });
   }
 
-  async getById(id:string): Promise<Category> {
-    return this.categoryRepository.findOne(id, {relations: ["tasks"]});
+  async getById(id: string): Promise<Category> {
+    return this.categoryRepository.findOne(id, { relations: ['tasks'] });
   }
 
   async create(categoryDto: CreateCategoryDto): Promise<Category> {
     const newCategory = this.categoryRepository.create(categoryDto);
-    return this.categoryRepository.save(newCategory)
+    return this.categoryRepository.save(newCategory);
   }
 
   async update(id: string, categoryDto: UpdateCategoryDto): Promise<Category> {
