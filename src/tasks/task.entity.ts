@@ -12,6 +12,8 @@ export class Task {
   @Column({ default: false })
   isCompleted: boolean;
 
-  @ManyToOne(() => Category, (category) => category.tasks)
+  @ManyToOne(() => Category, (category) => category.tasks, {
+    onDelete: 'CASCADE',
+  })
   category: Category;
 }

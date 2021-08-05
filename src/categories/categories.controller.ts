@@ -3,10 +3,13 @@ import {
   Controller,
   Delete,
   Get,
+  HttpCode,
+  HttpStatus,
   Param,
   Post,
   Put,
 } from '@nestjs/common';
+import { DeleteResult } from 'typeorm';
 import { CategoriesService } from './categories.service';
 import { Category } from './category.entity';
 import { CreateCategoryDto } from './dto/create-category.dto';
@@ -40,7 +43,8 @@ export class CategoriesController {
   }
 
   @Delete(':id')
-  remove(@Param('id') id: string): Promise<Category> {
+  @HttpCode(HttpStatus.NO_CONTENT)
+  remove(@Param('id') id: string): Promise<DeleteResult> {
     return this.categoryService.remove(id);
   }
 }

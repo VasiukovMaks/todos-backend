@@ -1,6 +1,6 @@
 import { Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
-import { Connection, Repository } from 'typeorm';
+import { Connection, DeleteResult, Repository } from 'typeorm';
 import { Category } from './category.entity';
 import { CreateCategoryDto } from './dto/create-category.dto';
 import { UpdateCategoryDto } from './dto/update-category.dto';
@@ -19,7 +19,7 @@ export class CategoriesService {
   }
 
   async getById(id: string): Promise<Category> {
-    return this.categoryRepository.findOne(id, { relations: ['tasks'] });
+    return await this.categoryRepository.findOne(id, { relations: ['tasks'] });
   }
 
   async create(categoryDto: CreateCategoryDto): Promise<Category> {
@@ -32,8 +32,7 @@ export class CategoriesService {
     return this.categoryRepository.findOne(id);
   }
 
-  async remove(id: string): Promise<Category> {
-    await this.categoryRepository.delete(id);
-    return this.categoryRepository.findOne(id);
+  async remove(id: string): Promise<DeleteResult> {
+    return await this.categoryRepository.delete(id);
   }
 }
