@@ -18,7 +18,7 @@ export class CategoriesService {
     });
   }
 
-  async getById(id: string): Promise<Category> {
+  async getById(id: string): Promise<Category | undefined> {
     return await this.categoryRepository.findOne(id, { relations: ['tasks'] });
   }
 
