@@ -8,7 +8,7 @@ import {
   Param,
   Post,
   Put,
-  UseGuards,
+  Query,
 } from '@nestjs/common';
 import { JwtAuthGuard } from 'src/auth/jwt-auth.guard';
 import { DeleteResult } from 'typeorm';
@@ -22,8 +22,8 @@ export class CategoriesController {
   constructor(private readonly categoryService: CategoriesService) {}
 
   @Get()
-  getAll(): Promise<Category[]> {
-    return this.categoryService.getAll();
+  getAll(@Query('userId') id: string): Promise<Category[]> {
+    return this.categoryService.getAll(id);
   }
 
   @Get(':id')

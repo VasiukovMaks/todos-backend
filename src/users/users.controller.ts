@@ -7,6 +7,7 @@ import {
   Post,
   Put,
 } from '@nestjs/common';
+import { Public } from 'src/auth/auth.decorator';
 import { CreateUserDto } from './dto/create-user.dto';
 import { UpdateUserDto } from './dto/update-user.dto';
 import { User } from './user.entity';
@@ -26,6 +27,7 @@ export class UsersController {
     return this.usersService.getById(id);
   }
 
+  @Public()
   @Post()
   create(@Body() createUserDto: CreateUserDto): Promise<User> {
     return this.usersService.create(createUserDto);

@@ -22,7 +22,7 @@ export class UsersService {
   }
 
   async getByEmail(email: string): Promise<User> {
-    return this.userRepository.findOne({ email });
+    return this.userRepository.findOne({ where: { email: email } });
   }
 
   async create(userDto: CreateUserDto): Promise<User> {

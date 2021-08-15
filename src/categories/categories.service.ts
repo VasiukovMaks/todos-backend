@@ -12,9 +12,10 @@ export class CategoriesService {
     private categoryRepository: Repository<Category>,
   ) {}
 
-  async getAll(): Promise<Category[]> {
+  async getAll(id: string): Promise<Category[]> {
     return await this.categoryRepository.find({
       relations: ['tasks'],
+      where: { user: id },
     });
   }
 
