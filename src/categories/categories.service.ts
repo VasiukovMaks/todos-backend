@@ -16,6 +16,7 @@ export class CategoriesService {
     return await this.categoryRepository.find({
       relations: ['tasks'],
       where: { user: id },
+      order: { id: 1 },
     });
   }
 
